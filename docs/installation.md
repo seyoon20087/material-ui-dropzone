@@ -1,9 +1,9 @@
 ```shell
-npm install --save material-ui-dropzone
+npm install --save @seyoon20087/material-ui-dropzone
 ```
 
 or
 
 ```shell
-yarn add material-ui-dropzone
+yarn add @seyoon20087/material-ui-dropzone
 ```
