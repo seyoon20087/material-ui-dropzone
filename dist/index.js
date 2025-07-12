@@ -23,7 +23,7 @@ var CloseIcon = require('@mui/icons-material/Close');
 var ErrorIcon = require('@mui/icons-material/Error');
 var InfoIcon = require('@mui/icons-material/Info');
 var WarningIcon = require('@mui/icons-material/Warning');
-var keyframes = require('@mui/styled-engine/keyframes');
+var styledEngine = require('@mui/styled-engine');
 var Dialog = require('@mui/material/Dialog');
 var DialogActions = require('@mui/material/DialogActions');
 var DialogContent = require('@mui/material/DialogContent');
@@ -299,7 +299,7 @@ const classes = {
   icon: `${PREFIX}-icon`,
   resetButton: `${PREFIX}-resetButton`
 };
-const progress = keyframes({
+const progress = styledEngine.keyframes({
   "0%": {
     backgroundPosition: "0 0"
   },

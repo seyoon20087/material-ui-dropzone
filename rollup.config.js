@@ -38,5 +38,5 @@ export default {
     commonjs(),
     //sizeSnapshot(),
   ],
-  external: ["@mui/utils/deepmerge", "@mui/styled-engine/keyframes"],
+  external: ["@mui/utils/deepmerge", "@mui/styled-engine"],
 };
