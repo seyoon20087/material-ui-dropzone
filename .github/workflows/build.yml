@@ -31,4 +31,4 @@ jobs:
         with:
           author-name: ${{ github.actor }}
           author-email: ${{ github.actor }}@users.noreply.github.com
-          commit-message: ':package: Rebuild dist @ ${{ github.sha }}'
+          commit-message: ":package: Rebuild dist @ ${{ github.sha }}"

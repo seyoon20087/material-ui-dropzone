@@ -1,9 +1,9 @@
-import { ChipProps } from '@mui/material/Chip';
-import { DialogProps } from '@mui/material/Dialog';
-import { GridProps } from '@mui/material/Grid';
-import { SnackbarProps } from '@mui/material/Snackbar';
-import * as React from 'react';
-import { DropEvent, DropzoneProps } from 'react-dropzone';
+import { ChipProps } from "@mui/material/Chip";
+import { DialogProps } from "@mui/material/Dialog";
+import { GridProps } from "@mui/material/Grid";
+import { SnackbarProps } from "@mui/material/Snackbar";
+import * as React from "react";
+import { DropEvent, DropzoneProps } from "react-dropzone";
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
@@ -16,27 +16,11 @@ export interface PreviewIconProps {
   readonly classes: string;
 }
 
-export type AlertType = 'error' | 'success' | 'info';
+export type AlertType = "error" | "success" | "info";
 
 // DropzoneAreaBase
 
-export type DropzoneAreaBaseClasses = {
-  /** Material-UI class applied to the root Dropzone div */
-  root: string;
-  /** Material-UI class applied to the Dropzone when 'active' */
-  active: string;
-  /** Material-UI class applied to the Dropzone when 'invalid' */
-  invalid: string;
-  /** Material-UI class applied to the Dropzone text container div */
-  textContainer: string;
-  /** Material-UI class applied to the Dropzone text */
-  text: string;
-  /** Material-UI class applied to the Dropzone icon */
-  icon: string;
-};
-
 export type DropzoneAreaBaseProps = {
-  classes?: Partial<DropzoneAreaBaseClasses>;
   acceptedFiles?: string[];
   fileObjects: FileObject[];
   filesLimit?: number;
@@ -50,11 +34,6 @@ export type DropzoneAreaBaseProps = {
   showFileNames?: boolean;
   useChipsForPreview?: boolean;
   previewChipProps?: ChipProps;
-  previewGridClasses?: {
-    container?: string;
-    item?: string;
-    image?: string;
-  };
   previewGridProps?: {
     container?: GridProps;
     item?: GridProps;
@@ -78,11 +57,11 @@ export type DropzoneAreaBaseProps = {
   getDropRejectMessage?: (
     rejectedFile: File,
     acceptedFiles: string[],
-    maxFileSize: number
+    maxFileSize: number,
   ) => string;
   getPreviewIcon?: (
     file: FileObject,
-    classes: PreviewIconProps
+    classes: PreviewIconProps,
   ) => React.ReactElement;
 };
 
@@ -92,7 +71,7 @@ export const DropzoneAreaBase: React.ComponentType<DropzoneAreaBaseProps>;
 
 export type DropzoneAreaProps = Omit<
   DropzoneAreaBaseProps,
-  'fileObjects' | 'onAdd' | 'onDelete'
+  "fileObjects" | "onAdd" | "onDelete"
 > & {
   clearOnUnmount?: boolean;
   initialFiles?: (File | string)[];
@@ -122,7 +101,7 @@ export const DropzoneDialogBase: React.ComponentType<DropzoneDialogBaseProps>;
 
 export type DropzoneDialogProps = Omit<
   DropzoneDialogBaseProps,
-  'fileObjects' | 'onAdd' | 'onDelete' | 'onSave'
+  "fileObjects" | "onAdd" | "onDelete" | "onSave"
 > & {
   clearOnUnmount?: boolean;
   initialFiles?: (File | string)[];

@@ -41,26 +41,28 @@
 ### Sample theme override
 
 ```jsx
-import { MuiThemeProvider, createMuiTheme } from "@mui/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-import DropzoneArea from '../src/components/DropzoneArea';
+import DropzoneArea from "../src/components/DropzoneArea";
 
-const theme = createMuiTheme({
-  overrides: {
+const theme = createTheme({
+  components: {
     MuiDropzoneSnackbar: {
-      errorAlert: {
-        backgroundColor: "#AFA",
-        color: "#000"
+      styleOverrides: {
+        errorAlert: {
+          backgroundColor: "#AFA",
+          color: "#000",
+        },
+        successAlert: {
+          backgroundColor: "#FAA",
+          color: "#000",
+        },
       },
-      successAlert: {
-        backgroundColor: "#FAA",
-        color: "#000"
-      },
-    }
-  }
+    },
+  },
 });
 
-<MuiThemeProvider theme={theme}>
+<ThemeProvider theme={theme}>
   <DropzoneArea maxFileSize={1} />
-</MuiThemeProvider>
+</ThemeProvider>;
 ```

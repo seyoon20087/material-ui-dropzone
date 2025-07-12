@@ -22,21 +22,15 @@
       "version": "15.0"
     }
   },
-  "plugins": [
-    "babel",
-    "react"
-  ],
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ],
+  "plugins": ["babel", "react"],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
     "array-bracket-spacing": ["error", "never"],
     "arrow-parens": "error",
     "arrow-spacing": "error",
     "brace-style": "error",
     "comma-dangle": ["error", "always-multiline"],
-    "comma-spacing": ["error", {"before": false, "after": true}],
+    "comma-spacing": ["error", { "before": false, "after": true }],
     "comma-style": ["error", "last"],
     "computed-property-spacing": ["error", "never"],
     "consistent-return": "off",
@@ -47,12 +41,12 @@
     "eqeqeq": ["error", "smart"],
     "generator-star-spacing": "error",
     "id-blacklist": ["error", "e"],
-    "indent": ["error", 4, {"SwitchCase": 1}],
+    "indent": ["error", 4, { "SwitchCase": 1 }],
     "jsx-quotes": ["error", "prefer-double"],
     "key-spacing": "error",
     "keyword-spacing": "error",
-    "max-len": ["error", 120, 4, {"ignoreComments": true}],
-    "new-cap": ["off", {"capIsNew": true, "newIsCap": true}],
+    "max-len": ["error", 120, 4, { "ignoreComments": true }],
+    "new-cap": ["off", { "capIsNew": true, "newIsCap": true }],
     "no-await-in-loop": "error",
     "no-case-declarations": "off",
     "no-cond-assign": "error",
@@ -85,7 +79,7 @@
     "space-before-blocks": ["error", "always"],
     "space-before-function-paren": ["error", "never"],
     "space-infix-ops": "error",
-    "space-unary-ops": ["error", {"words": true, "nonwords": false}],
+    "space-unary-ops": ["error", { "words": true, "nonwords": false }],
     "spaced-comment": "error",
     "strict": "off",
     "yoda": "error",
