@@ -13,7 +13,7 @@ import { convertBytesToMbsOrKbs, isImage, readFile } from "../helpers";
 import PreviewList from "./PreviewList";
 import SnackbarContentWrapper from "./SnackbarContentWrapper";
 
-import { keyframes } from "@emotion/react";
+import keyframes from "@mui/styled-engine/keyframes";
 import deepmerge from "@mui/utils/deepmerge";
 
 const PREFIX = "MuiDropzoneArea";
