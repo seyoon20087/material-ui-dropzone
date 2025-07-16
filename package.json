@@ -6,7 +6,7 @@
   "author": "Yuval",
   "repository": {
     "type": "git",
-    "url": "https://github.com/seyoon20087/material-ui-dropzone.git"
+    "url": "git+https://github.com/seyoon20087/material-ui-dropzone.git"
   },
   "keywords": [
     "react",
