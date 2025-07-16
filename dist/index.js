@@ -445,9 +445,9 @@ class DropzoneAreaBase extends React__namespace.PureComponent {
       snackbarVariant: "success"
     }, this.notifyAlert);
   };
-  handleDropRejected = (rejectedFiles, evt) => {
+  dropzoneRootRef = /*#__PURE__*/React__namespace.createRef();
+  handleDropRejected = (fileRejections, evt) => {
     const {
-      acceptedFiles,
       filesLimit,
       fileObjects,
       getDropRejectMessage,
@@ -456,11 +456,11 @@ class DropzoneAreaBase extends React__namespace.PureComponent {
       onDropRejected
     } = this.props;
     let message = "";
-    if (fileObjects.length + rejectedFiles.length > filesLimit) {
+    if (fileObjects.length + fileRejections.length > filesLimit) {
       message = getFileLimitExceedMessage(filesLimit);
     } else {
-      rejectedFiles.forEach(rejectedFile => {
-        message = getDropRejectMessage(rejectedFile, acceptedFiles, maxFileSize);
+      fileRejections.forEach(fileRejection => {
+        message = getDropRejectMessage(fileRejection, maxFileSize);
       });
     }
     if (onDropRejected) {
@@ -471,6 +471,9 @@ class DropzoneAreaBase extends React__namespace.PureComponent {
       snackbarMessage: message,
       snackbarVariant: "error"
     }, this.notifyAlert);
+    this.dropzoneRootRef.current.dispatchEvent(new Event("dragleave", {
+      bubbles: true
+    }));
   };
   handleRemove = fileIndex => event => {
     event.stopPropagation();
@@ -547,11 +550,16 @@ class DropzoneAreaBase extends React__namespace.PureComponent {
           getRootProps,
           getInputProps,
           isDragActive,
-          isDragReject
+          isDragReject,
+          rootRef
         }) => /*#__PURE__*/jsxRuntime.jsxs(StyledDropzoneRoot, {
           ...getRootProps({
             className: clsx(classes.root, dropzoneClass, isDragActive && classes.active, !disableRejectionFeedback && isDragReject && classes.invalid)
           }),
+          ref: function () {
+            this.dropzoneRootRef = rootRef;
+            return rootRef;
+          }.apply(this),
           children: [/*#__PURE__*/jsxRuntime.jsx("input", {
             ...getInputProps(inputProps)
           }), /*#__PURE__*/jsxRuntime.jsxs("div", {
@@ -639,14 +647,20 @@ DropzoneAreaBase.defaultProps = {
   getFileAddedMessage: fileName => `File ${fileName} successfully added.`,
   getPreviewIcon: defaultGetPreviewIcon,
   getFileRemovedMessage: fileName => `File ${fileName} removed.`,
-  getDropRejectMessage: (rejectedFile, acceptedFiles, maxFileSize) => {
-    let message = `File ${rejectedFile.name} was rejected. `;
-    if (!acceptedFiles.includes(rejectedFile.type)) {
-      message += "File type not supported. ";
-    }
-    if (rejectedFile.size > maxFileSize) {
-      message += "File is too big. Size limit is " + convertBytesToMbsOrKbs(maxFileSize) + ". ";
-    }
+  getDropRejectMessage: (fileRejection, maxFileSize) => {
+    let message = `File ${fileRejection.file.name} was rejected. `;
+    fileRejection.errors.forEach(({
+      code
+    }) => {
+      switch (code) {
+        case "file-invalid-type":
+          message += "File type not supported. ";
+          break;
+        case "file-too-large":
+          message += "File is too big. Size limit is " + convertBytesToMbsOrKbs(maxFileSize) + ". ";
+          break;
+      }
+    });
     return message;
   }
 };
@@ -658,7 +672,7 @@ process.env.NODE_ENV !== "production" ? DropzoneAreaBase.propTypes = {
   /** A list of file types to accept.
    * @see See [here](https://react-dropzone.js.org/#section-accepting-specific-file-types) for more details.
    */
-  acceptedFiles: PropTypes.arrayOf(PropTypes.string),
+  acceptedFiles: PropTypes.object,
   /** Maximum number of files that can be loaded into the dropzone. */
   filesLimit: PropTypes.number,
   /** Icon to be displayed inside the dropzone area. */
@@ -768,10 +782,9 @@ process.env.NODE_ENV !== "production" ? DropzoneAreaBase.propTypes = {
   /**
    * Get alert message to display when a file is rejected onDrop.
    *
-   * *Default*: "File ${rejectedFile.name} was rejected."
+   * *Default*: "File ${fileRejection.file.name} was rejected."
    *
-   * @param {Object} rejectedFile The file that got rejected
-   * @param {string[]} acceptedFiles The `acceptedFiles` prop currently set for the component
+   * @param {FileRejection} fileRejection The file rejection object
    * @param {number} maxFileSize The `maxFileSize` prop currently set for the component
    */
   getDropRejectMessage: PropTypes.func,
@@ -807,7 +820,7 @@ process.env.NODE_ENV !== "production" ? DropzoneAreaBase.propTypes = {
   /**
    * Fired when a file is rejected because of wrong file type, size or goes beyond the filesLimit.
    *
-   * @param {File[]} rejectedFiles All the rejected files.
+   * @param {FileRejection[]} fileRejections All the file rejections.
    * @param {Event} event The react-dropzone drop event.
    */
   onDropRejected: PropTypes.func,

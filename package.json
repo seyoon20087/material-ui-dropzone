@@ -1,6 +1,6 @@
 {
   "name": "@seyoon20087/material-ui-dropzone",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "An MUI file-upload dropzone",
   "license": "MIT",
   "author": "Yuval",
@@ -42,7 +42,7 @@
   "dependencies": {
     "@babel/runtime": "^7.27.6",
     "clsx": "^1.0.2",
-    "react-dropzone": "10.2.1"
+    "react-dropzone": "^14.3.8"
   },
   "peerDependencies": {
     "@emotion/react": "^11.14.0",

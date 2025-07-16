@@ -14,7 +14,7 @@ import { DropzoneArea } from "@seyoon20087/material-ui-dropzone";
 
 ```jsx
 <DropzoneArea
-  acceptedFiles={["image/*"]}
+  acceptedFiles={{ "image/*": [] }}
   dropzoneText={"Drag and drop an image here or click"}
   onChange={(files) => console.log("Files:", files)}
 />

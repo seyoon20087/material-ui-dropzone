@@ -27,6 +27,7 @@ yarn add @seyoon20087/material-ui-dropzone
 
 | version | React            | Material-UI    |
 | ------- | ---------------- | -------------- |
+| `5.x`   | `>= 17.x`        | `7.x`          |
 | `4.x`   | `>= 17.x`        | `7.x`          |
 | `3.x`   | `16.8+`          | `4.x`          |
 | `2.x`   | `15.x` or `16.x` | `3.x` or `4.x` |
@@ -127,7 +128,11 @@ export default class DropzoneDialogExample extends Component {
         <DropzoneDialog
           open={this.state.open}
           onSave={this.handleSave.bind(this)}
-          acceptedFiles={["image/jpeg", "image/png", "image/bmp"]}
+          acceptedFiles={{
+            "image/jpeg": [],
+            "image/png": [],
+            "image/bmp": [],
+          }}
           showPreviews={true}
           maxFileSize={5000000}
           onClose={this.handleClose.bind(this)}

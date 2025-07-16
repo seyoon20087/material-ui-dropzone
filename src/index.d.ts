@@ -3,7 +3,12 @@ import { DialogProps } from "@mui/material/Dialog";
 import { GridProps } from "@mui/material/Grid";
 import { SnackbarProps } from "@mui/material/Snackbar";
 import * as React from "react";
-import { DropEvent, DropzoneProps } from "react-dropzone";
+import {
+  DropEvent,
+  DropzoneProps,
+  FileRejection,
+  Accept,
+} from "react-dropzone";
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
@@ -21,7 +26,7 @@ export type AlertType = "error" | "success" | "info";
 // DropzoneAreaBase
 
 export type DropzoneAreaBaseProps = {
-  acceptedFiles?: string[];
+  acceptedFiles?: Accept;
   fileObjects: FileObject[];
   filesLimit?: number;
   Icon?: React.ComponentType;
@@ -49,14 +54,13 @@ export type DropzoneAreaBaseProps = {
   onAdd?: (newFiles: FileObject[]) => void;
   onDelete?: (deletedFileObject: FileObject, index: number) => void;
   onDrop?: (files: File[], event: DropEvent) => void;
-  onDropRejected?: (files: File[], event: DropEvent) => void;
+  onDropRejected?: (files: FileRejection[], event: DropEvent) => void;
   onAlert?: (message: string, variant: AlertType) => void;
   getFileLimitExceedMessage?: (filesLimit: number) => string;
   getFileAddedMessage?: (fileName: string) => string;
   getFileRemovedMessage?: (fileName: string) => string;
   getDropRejectMessage?: (
-    rejectedFile: File,
-    acceptedFiles: string[],
+    fileRejection: FileRejection,
     maxFileSize: number,
   ) => string;
   getPreviewIcon?: (

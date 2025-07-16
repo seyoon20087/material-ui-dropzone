@@ -33,7 +33,7 @@ const dialogTitle = () => (
 
   <DropzoneDialogBase
     dialogTitle={dialogTitle()}
-    acceptedFiles={["image/*"]}
+    acceptedFiles={{ "image/*": [] }}
     fileObjects={fileObjects}
     cancelButtonText={"cancel"}
     submitButtonText={"submit"}

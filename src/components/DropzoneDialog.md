@@ -17,7 +17,7 @@ const [open, setOpen] = React.useState(false);
   </Button>
 
   <DropzoneDialog
-    acceptedFiles={["image/*"]}
+    acceptedFiles={{ "image/*": [] }}
     cancelButtonText={"cancel"}
     submitButtonText={"submit"}
     maxFileSize={5000000}
