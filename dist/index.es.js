@@ -425,7 +425,6 @@ class DropzoneAreaBase extends React.PureComponent {
       snackbarVariant: "success"
     }, this.notifyAlert);
   };
-  dropzoneRootRef = /*#__PURE__*/React.createRef();
   handleDropRejected = (fileRejections, evt) => {
     const {
       filesLimit,
@@ -451,9 +450,6 @@ class DropzoneAreaBase extends React.PureComponent {
       snackbarMessage: message,
       snackbarVariant: "error"
     }, this.notifyAlert);
-    this.dropzoneRootRef.current.dispatchEvent(new Event("dragleave", {
-      bubbles: true
-    }));
   };
   handleRemove = fileIndex => event => {
     event.stopPropagation();
@@ -530,16 +526,11 @@ class DropzoneAreaBase extends React.PureComponent {
           getRootProps,
           getInputProps,
           isDragActive,
-          isDragReject,
-          rootRef
+          isDragReject
         }) => /*#__PURE__*/jsxs(StyledDropzoneRoot, {
           ...getRootProps({
-            className: clsx(classes.root, dropzoneClass, isDragActive && classes.active, !disableRejectionFeedback && isDragReject && classes.invalid)
+            className: clsx(classes.root, dropzoneClass, isDragActive && [classes.active, !disableRejectionFeedback && isDragReject && classes.invalid])
           }),
-          ref: function () {
-            this.dropzoneRootRef = rootRef;
-            return rootRef;
-          }.apply(this),
           children: [/*#__PURE__*/jsx("input", {
             ...getInputProps(inputProps)
           }), /*#__PURE__*/jsxs("div", {
